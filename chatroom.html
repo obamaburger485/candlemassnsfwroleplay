@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chatroom</title>
+  <style>
+    .chatbox {
+      width: 400px;
+      height: 400px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      overflow-y: scroll;
+    }
+    .message {
+      margin-bottom: 10px;
+    }
+    .user {
+      font-weight: bold;
+    }
+    .timestamp {
+      font-size: 0.8em;
+      color: #888;
+    }
+    .input {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="chatbox" id="chatbox"></div>
+  <div class="input">
+    <input type="text" id="messageInput" placeholder="Type your message">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+  <script>
+    function sendMessage() {
+      var messageInput = document.getElementById('messageInput');
+      var message = messageInput.value;
+
+      if (message.trim() !== '') {
+        var chatbox = document.getElementById('chatbox');
+        var newMessage = document.createElement('div');
+        newMessage.className = 'message';
+        newMessage.innerHTML = '<span class="user">You:</span> ' + message + '<br><span class="timestamp">' + getCurrentTimestamp() + '</span>';
+        chatbox.appendChild(newMessage);
+
+        messageInput.value = '';
+      }
+    }
+
+    function getCurrentTimestamp() {
+      var now = new Date();
+      var hours = now.getHours();
+      var minutes = now.getMinutes();
+      var seconds = now.getSeconds();
+      return hours + ':' + minutes + ':' + seconds;
+    }
+  </script>
+</body>
+</html>
